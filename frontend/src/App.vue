@@ -1,18 +1,19 @@
 <template>
-
-  <Upload/>
+  <HelloWorld />
+  <Upload />
 </template>
 
 <script>
-
-import Upload from './components/Upload.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import Upload from "./components/Upload.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Upload
-  }
-}
+    Upload,
+    HelloWorld,
+  },
+};
 </script>
 
 <style>
