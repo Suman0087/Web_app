@@ -1,22 +1,18 @@
 <template>
-  <HelloWorld />
-  <Upload />
+  <router-view />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-import Upload from "./components/Upload.vue";
-
 export default {
   name: "App",
-  components: {
-    Upload,
-    HelloWorld,
-  },
 };
 </script>
 
 <style>
+body {
+  padding: 0;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
