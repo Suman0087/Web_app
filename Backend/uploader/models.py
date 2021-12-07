@@ -8,6 +8,9 @@ class FileUpload(models.Model):
     page_count = models.IntegerField(default=0)
     xml_file = models.FileField(blank=True)
     read_xml = models.TextField(blank=True)
+    read_name = models.CharField(max_length=20, blank=True)
+    read_email = models.EmailField(blank=True)
+    read_gender = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
         return str(self.name)

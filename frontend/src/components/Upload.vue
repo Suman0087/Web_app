@@ -10,7 +10,7 @@
       <br />
       <br />
       <label>
-        File
+        Upload PDF File
         <input type="file" @change="handleFileUpload($event)" />
       </label>
       <br />

@@ -1,3 +1,4 @@
+from os import name
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from .models import FileUpload
@@ -21,8 +22,8 @@ def fileupload(sender, instance, created, **kwargs):
         instance.save()
 
 
-# @receiver(post_save, sender=FileUpload)
-# def fileupload(sender, instance, created, **kwargs):
+@receiver(post_save, sender=FileUpload)
+def xmlfileupload(sender, instance, created, **kwargs):
     if created and instance.xml_file:
         files = instance.xml_file
         read = ET.parse(files)
@@ -32,5 +33,10 @@ def fileupload(sender, instance, created, **kwargs):
         for element in text:
             for subelement in element:
                 elements.append(subelement.text)
+                # elements.append(subelement[1].text)
         instance.read_xml = elements
+        instance.read_name = elements[1]
+        instance.read_email = elements[2]
+        instance.read_gender = elements[12]
+
         instance.save()

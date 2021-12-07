@@ -9,12 +9,16 @@
         <td>Is Password Protected</td>
         <td>Page No.</td>
         <td>Document</td>
+        <!-- <td>Document</td> -->
+        <!-- <td>Document</td> -->
       </tr>
       <tr class="header-list" v-for="item in info" :key="item">
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.is_password_protected }}</td>
         <td>{{ item.page_count }}</td>
+        <!-- <td>{{ item.xml_file }}</td> -->
+        <!-- <td>{{ item.read_xml }}</td> -->
         <td>
           <!-- <a :href="item.document">{{ item.document }}</a> -->
           <a :href="item.pdf_file" download>
@@ -22,15 +26,11 @@
           </a>
         </td>
       </tr>
-      <!-- <div>
-        <button class="buttons" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
-        <button class="buttons" @click="goToNextPage()" v-if="showNextButton">Next</button>
-      </div>-->
     </table>
-    <!-- <div>
+    <div>
       <button class="buttons" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
       <button class="buttons" @click="goToNextPage()" v-if="showNextButton">Next</button>
-    </div>-->
+    </div>
   </div>
 </template>
 
@@ -64,9 +64,9 @@ export default {
     },
     async getData() {
       await axios
-        .get("http://127.0.0.1:8000/api/upload/")
+        // .get("http://127.0.0.1:8000/api/upload/")
 
-        // .get(`http://127.0.0.1:8000/api/upload/?page=${this.currentPage}`)
+        .get(`http://127.0.0.1:8000/api/upload/?page=${this.currentPage}`)
         .then((res) => {
           console.log(res.data);
           this.info = res.data.results;
