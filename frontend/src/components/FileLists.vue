@@ -8,8 +8,8 @@
         <td>Name</td>
         <td>Is Password Protected</td>
         <td>Page No.</td>
-        <td>Document</td>
-        <!-- <td>Document</td> -->
+        <td>PDF File</td>
+        <td>XML File</td>
         <!-- <td>Document</td> -->
       </tr>
       <tr class="header-list" v-for="item in info" :key="item">
@@ -22,6 +22,12 @@
         <td>
           <!-- <a :href="item.document">{{ item.document }}</a> -->
           <a :href="item.pdf_file" download>
+            <Button class="button">Download</Button>
+          </a>
+        </td>
+        <td>
+          <!-- <a :href="item.document">{{ item.document }}</a> -->
+          <a :href="item.xml_file" download>
             <Button class="button">Download</Button>
           </a>
         </td>

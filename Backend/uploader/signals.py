@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from .models import FileUpload
 from pikepdf import Pdf, PdfError, PasswordError
 import xml.etree.ElementTree as ET
+from xml.dom import minidom
 
 
 @receiver(post_save, sender=FileUpload)
@@ -27,16 +28,22 @@ def xmlfileupload(sender, instance, created, **kwargs):
     if created and instance.xml_file:
         files = instance.xml_file
         read = ET.parse(files)
-        text = read.getroot()
+        texts = read.getroot()
         elements = []
-        print(text)
-        for element in text:
+        print(texts)
+        # import pdb
+        # pdb.set_trace()
+        reads = minidom.parse(files)
+        tagname = reads.getElementsByTagName('root')
+        for x in tagname:
+            print(x.firstChild.data)
+
+        for element in texts:
             for subelement in element:
                 elements.append(subelement.text)
-                # elements.append(subelement[1].text)
         instance.read_xml = elements
         instance.read_name = elements[1]
         instance.read_email = elements[2]
-        instance.read_gender = elements[12]
+        instance.read_gender = elements[3]
 
         instance.save()
