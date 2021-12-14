@@ -9,8 +9,8 @@ class FileUpload(models.Model):
     xml_file = models.FileField(blank=True)
     read_xml = models.TextField(blank=True)
     read_name = models.CharField(max_length=20, blank=True)
-    read_email = models.EmailField(blank=True)
-    read_gender = models.CharField(max_length=10, blank=True)
+    read_title = models.CharField(max_length=20, blank=True)
+    read_div = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return str(self.name)

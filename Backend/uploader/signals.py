@@ -4,7 +4,7 @@ from django.dispatch import receiver
 from .models import FileUpload
 from pikepdf import Pdf, PdfError, PasswordError
 import xml.etree.ElementTree as ET
-from xml.dom import minidom
+import xml.dom.minidom
 
 
 @receiver(post_save, sender=FileUpload)
@@ -27,23 +27,36 @@ def fileupload(sender, instance, created, **kwargs):
 def xmlfileupload(sender, instance, created, **kwargs):
     if created and instance.xml_file:
         files = instance.xml_file
+
+        # doc = xml.dom.minidom.parse(files)
+        # rows = doc.getElementsByTagName('employee')
+        # print(rows.length)
+
+        # for i in range(rows.length):
+        #     name = doc.getElementsByTagName("firstname")[i]
+        #     instance.read_name = instance.read_name+(name.firstChild.data)+" "
+        #     title = doc.getElementsByTagName("title")[i]
+        #     instance.read_email = instance.read_email + \
+        #         (title.firstChild.data)+" "
+        # room_no = doc.getElementsByTagName("room")[i]
+        # instance.read_room_no = instance.read_room_no + \
+        #     (room_no.firstChild.data)+" "
         read = ET.parse(files)
         texts = read.getroot()
         elements = []
-        print(texts)
-        # import pdb
-        # pdb.set_trace()
-        reads = minidom.parse(files)
-        tagname = reads.getElementsByTagName('root')
-        for x in tagname:
-            print(x.firstChild.data)
 
         for element in texts:
             for subelement in element:
                 elements.append(subelement.text)
-        instance.read_xml = elements
-        instance.read_name = elements[1]
-        instance.read_email = elements[2]
-        instance.read_gender = elements[3]
+                instance.read_xml = elements
+                element.findtext('firstname')
+                instance.read_name = instance.read_name + \
+                    (element.findtext('firstname'))+" "
+                element.findtext('title')
+                instance.read_title = instance.read_title + \
+                    (element.findtext('title'))+" "
+                element.findtext('division')
+                instance.read_div = instance.read_div + \
+                    (element.findtext('division'))+" "
 
         instance.save()
