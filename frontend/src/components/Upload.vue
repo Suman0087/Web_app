@@ -1,9 +1,10 @@
-<template>
+ <template>
   <Header />
+
   <div class="card">
     <div class="container">
       <div class="form-control">
-        <h2 class="heads">PDF File Upload</h2>
+        <h2 class="heads">Upload PDF File</h2>
         <label>
           Name
           <input type="text" v-model="name" />
@@ -16,62 +17,41 @@
         </label>
         <br />
         <br />
-        <label>
-          Upload PDF File
-          <input type="file" @change="handleFileUpload($event)" />
-        </label>
-        <br />
       </div>
       <button class="submit-button" v-on:click="submitFile()">Submit</button>
     </div>
-    <!-- <div class="container">
-      <div class="form-control">
-        <h2 class="heads">XML File Upload</h2>
-        <label>
-          Upload PDF File
-          <input type="file" @change="handleFileUpload($event)" />
-        </label>
-        <br />
-
-        <br />
-      </div>
-      <button class="submit-button" v-on:click="submitFile()">Submit</button>
-    </div>-->
+    <XmlFileUpload />
   </div>
 </template>
 
 <script>
 import Header from "./Header.vue";
+import XmlFileUpload from "./XmlFileUpload.vue";
 import axios from "axios";
-
 export default {
   components: {
     Header,
+    XmlFileUpload,
   },
   data() {
     return {
       name: "",
       pdf_file: "",
-      xml_file: "",
     };
   },
-
   methods: {
     handleFileUpload(event) {
-      this.document = event.target.files[1];
+      this.pdf_file = event.target.files[0];
     },
-
     submitFile() {
       let formData = new FormData();
-
       formData.append("name", this.name);
-      formData.append("pdf_file)", this.pdf_file);
-      formData.append("xml_file)", this.xml_file);
+      formData.append("pdf_file", this.pdf_file);
 
       axios
         .post("http://127.0.0.1:8000/api/upload/", formData)
-        .then(function () {
-          console.log("SUCCESS");
+        .then(function (res) {
+          console.log(res);
         });
     },
   },
@@ -81,6 +61,7 @@ export default {
 <style scoped>
 .card {
   display: flex;
+  padding-right: 10rem;
 }
 .container {
   background-color: #b4b4b462;

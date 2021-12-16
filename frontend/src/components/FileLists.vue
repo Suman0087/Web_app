@@ -1,5 +1,6 @@
 <template>
   <Header />
+
   <div class="table-container">
     <!-- <h1 class="heading">Details of Pdf File</h1> -->
     <table class="table-list" border="1">
@@ -9,8 +10,6 @@
         <td>Is Password Protected</td>
         <td>Page No.</td>
         <td>PDF File</td>
-        <td>XML File</td>
-        <!-- <td>Document</td> -->
       </tr>
       <tr class="header-list" v-for="item in info" :key="item">
         <td>{{ item.id }}</td>
@@ -20,14 +19,7 @@
         <!-- <td>{{ item.xml_file }}</td> -->
         <!-- <td>{{ item.read_xml }}</td> -->
         <td>
-          <!-- <a :href="item.document">{{ item.document }}</a> -->
           <a :href="item.pdf_file" download>
-            <Button class="button">Download</Button>
-          </a>
-        </td>
-        <td>
-          <!-- <a :href="item.document">{{ item.document }}</a> -->
-          <a :href="item.xml_file" download>
             <Button class="button">Download</Button>
           </a>
         </td>
@@ -38,15 +30,18 @@
       <button class="buttons" @click="goToNextPage()" v-if="showNextButton">Next</button>
     </div>
   </div>
+  <!-- <XmlList /> -->
 </template>
 
 <script>
 import Header from "./Header.vue";
+// import XmlList from "./XmlList.vue";
 import axios from "axios";
 
 export default {
   components: {
     Header,
+    // XmlList,
   },
   data() {
     return {
@@ -95,6 +90,10 @@ export default {
 </script>
 
 <style>
+.table-card {
+  display: flex;
+  justify-content: space-between;
+}
 .table-container {
   padding: 0 230px;
   margin-top: 0rem;
