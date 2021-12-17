@@ -2,9 +2,10 @@
   <div class="nav">
     <a href="#">Home</a>
     <a v-on:click="upload" href="#">Upload</a>
-    <a v-on:click="filelists" href="#">FileLists</a>
-    <!-- <a v-on:click="xmlupload" href="#">XmlFileUplaod</a> -->
-    <a v-on:click="xmllist" href="#">Xml List</a>
+    <a v-on:click="filelists" href="#">PDF Lists</a>
+
+    <a v-on:click="xmllist" href="#">Xml Lists</a>
+    <!-- <a v-on:click="xmlupload" href="#">Details Of XML</a> -->
   </div>
 </template>
 
@@ -18,9 +19,9 @@ export default {
     filelists() {
       this.$router.push({ name: "FileLists" });
     },
-    // xmlupload() {
-    //   this.$router.push({ name: "XmlFileUpload" });
-    // },
+    xmlupload() {
+      this.$router.push({ name: "XmlListDetails" });
+    },
     xmllist() {
       this.$router.push({ name: "XmlList" });
     },

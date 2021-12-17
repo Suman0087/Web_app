@@ -1,7 +1,7 @@
 import Home from "./components/Home.vue";
 import Upload from "./components/Upload.vue";
 import FileLists from "./components/FileLists.vue"
-import XmlFileUpload from "./components/XmlFileUpload.vue"
+import XmlListDetails from "./components/XmlListDetails.vue"
 import XmlList from "./components/XmlList.vue"
 
 
@@ -24,9 +24,9 @@ const routes = [
         path: '/FileLists'
     },
     {
-        name: 'XmlFileUpload',
-        component: XmlFileUpload,
-        path: '/XmlFileUpload'
+        name: 'XmlListDetails',
+        component: XmlListDetails,
+        path: '/XmlListDetails'
     },
     {
         name: 'XmlList',

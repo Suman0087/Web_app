@@ -1,7 +1,7 @@
  <template>
   <Header />
   <div class="card">
-    <div class="container">
+    <div class="containers">
       <div class="form-control">
         <h2 class="heads">Upload XML File</h2>
         <label>
@@ -58,7 +58,7 @@ export default {
 .card {
   display: flex;
 }
-.container {
+.containers {
   background-color: #b4b4b462;
   max-width: 300px;
   margin: 40px auto;

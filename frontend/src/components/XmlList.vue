@@ -12,7 +12,10 @@
       </tr>
       <tr class="header-list" v-for="item in datas" :key="item">
         <td>{{ item.id }}</td>
-        <td>{{ item.xml_name}}</td>
+        <!-- <td>{{ item.xml_name}}</td> -->
+        <td>
+          <a v-on:click="xmlupload" href="#">{{ item.xml_name}}</a>
+        </td>
         <!-- <td>{{ item.xml_file}}</td> -->
         <!-- <td>{{ item.read_name }}</td>
         <td>{{ item.read_title }}</td>
@@ -25,10 +28,10 @@
         </td>
       </tr>
     </table>
-    <div>
+    <!-- <div>
       <button class="buttons" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
       <button class="buttons" @click="goToNextPage()" v-if="showNextButton">Next</button>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -52,31 +55,35 @@ export default {
     this.getData();
   },
   methods: {
-    goToNextPage() {
-      this.currentPage += 1;
-      this.getData();
+    xmlupload() {
+      this.$router.push({ name: "XmlListDetails" });
     },
-    goToPreviousPage() {
-      this.currentPage -= 1;
-      this.getData();
-    },
+    // goToNextPage() {
+    //   this.currentPage += 1;
+    //   this.getData();
+    // },
+    // goToPreviousPage() {
+    //   this.currentPage -= 1;
+    //   this.getData();
+    // },
     async getData() {
       await axios
-        // .get("http://127.0.0.1:8000/api/upload/")
+        .get("http://127.0.0.1:8000/api/xmlupload/")
 
-        .get(`http://127.0.0.1:8000/api/xmlupload/?page=${this.currentPage}`)
+        // .get(`http://127.0.0.1:8000/api/xmlupload/?page=${this.currentPage}`)
         .then((res) => {
           console.log(res.data);
-          this.datas = res.data.results;
-          // console.log(this.info);
+          this.datas = res.data;
+          // this.datas = res.data.results;
+          console.log(this.info);
 
-          if (res.data.next) {
-            this.showNextButton = true;
-          }
+          // if (res.data.next) {
+          //   this.showNextButton = true;
+          // }
 
-          if (res.data.previous) {
-            this.showPreviousButton = true;
-          }
+          // if (res.data.previous) {
+          //   this.showPreviousButton = true;
+          // }
         })
         .catch((error) => {
           console.log(error);
@@ -103,6 +110,7 @@ export default {
 
 td {
   width: 150px;
+  border-collapse: collapse;
 }
 
 .header-list:hover {

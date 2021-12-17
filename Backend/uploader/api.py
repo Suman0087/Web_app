@@ -19,4 +19,4 @@ class XMLFileUploadViewset(viewsets.ModelViewSet):
 
     queryset = XMLFileUpload.objects.all()
     serializer_class = XMLFileUploadSerializer
-    pagination_class = PostPagination
+    # pagination_class = PostPagination
