@@ -4,14 +4,16 @@ from django.dispatch import receiver
 from .models import FileUpload, XMLFileUpload
 from pikepdf import Pdf, PdfError, PasswordError
 import xml.etree.ElementTree as ET
-import xml.dom.minidom
+# from .tasks import pdf_file_uploads
 
 
 @receiver(post_save, sender=FileUpload)
 def fileupload(sender, instance, created, **kwargs):
     if created and instance.pdf_file:
+        # pdf_file_uploads.delay()
         print('file is uploaded')
         file = instance.pdf_file
+        # instance.is_pdf_file_uploaded = True
 
         try:
             count = Pdf.open(file)

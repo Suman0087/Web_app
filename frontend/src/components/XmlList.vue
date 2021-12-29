@@ -7,20 +7,14 @@
         <td>Sl No.</td>
         <td>XML Name</td>
         <td>XML File</td>
-        <!-- <td>Title</td>
-        <td>Division</td>-->
       </tr>
       <tr class="header-list" v-for="item in datas" :key="item">
         <td>{{ item.id }}</td>
-        <!-- <td>{{ item.xml_name}}</td> -->
+
         <td>
-          <a v-on:click="xmlupload" href="#">{{ item.xml_name}}</a>
+          <a v-on:click="xmlupload(item.id)" href="#">{{ item.xml_name}}</a>
         </td>
-        <!-- <td>{{ item.xml_file}}</td> -->
-        <!-- <td>{{ item.read_name }}</td>
-        <td>{{ item.read_title }}</td>
-        <td>{{ item.read_div }}</td>-->
-        <!-- <td>{{ item.read_xml }}</td> -->
+
         <td>
           <a :href="item.xml_file" download>
             <Button class="button">Download</Button>
@@ -28,10 +22,6 @@
         </td>
       </tr>
     </table>
-    <!-- <div>
-      <button class="buttons" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
-      <button class="buttons" @click="goToNextPage()" v-if="showNextButton">Next</button>
-    </div>-->
   </div>
 </template>
 
@@ -46,44 +36,24 @@ export default {
   data() {
     return {
       datas: [],
-      showNextButton: false,
-      showPreviousButton: false,
-      currentPage: 1,
     };
   },
   mounted() {
     this.getData();
   },
   methods: {
-    xmlupload() {
-      this.$router.push({ name: "XmlListDetails" });
+    xmlupload(id) {
+      this.$router.push({ name: "XmlListDetails", query: { id } });
     },
-    // goToNextPage() {
-    //   this.currentPage += 1;
-    //   this.getData();
-    // },
-    // goToPreviousPage() {
-    //   this.currentPage -= 1;
-    //   this.getData();
-    // },
+
     async getData() {
       await axios
         .get("http://127.0.0.1:8000/api/xmlupload/")
-
-        // .get(`http://127.0.0.1:8000/api/xmlupload/?page=${this.currentPage}`)
         .then((res) => {
           console.log(res.data);
           this.datas = res.data;
-          // this.datas = res.data.results;
+
           console.log(this.info);
-
-          // if (res.data.next) {
-          //   this.showNextButton = true;
-          // }
-
-          // if (res.data.previous) {
-          //   this.showPreviousButton = true;
-          // }
         })
         .catch((error) => {
           console.log(error);

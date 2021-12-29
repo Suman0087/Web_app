@@ -2,11 +2,21 @@
   <div>
     <Header />
     <div class="container">
-      <div class="card-details" v-for="item in datas" :key="item">
-        <h1>{{ item.xml_name}}</h1>
-        <li>{{ item.read_name }}</li>
-        <li>{{ item.read_title }}</li>
-        <li>{{ item.read_div }}</li>
+      <div class="card-details">
+        <h1>{{ details.xml_name}}</h1>
+        <h2>Name</h2>
+        <p v-for="item in details.xml_name.read_name" :key="item">{{ item}}</p>
+
+        <h2>Title</h2>
+
+        <li>{{ details.read_title }}</li>
+
+        <h2>Division</h2>
+
+        <li>{{ details.read_div }}</li>
+
+        <!-- <li>{{ details.read_title }}</li>
+        <li>{{ details.read_div }}</li>-->
       </div>
     </div>
   </div>
@@ -15,49 +25,29 @@
 <script>
 import Header from "./Header.vue";
 import axios from "axios";
-
 export default {
   components: {
     Header,
   },
+  name: "XmlList",
   data() {
     return {
-      datas: [],
-      showNextButton: false,
-      showPreviousButton: false,
-      currentPage: 1,
+      details: "",
+      id: "",
     };
   },
   mounted() {
     this.getData();
   },
   methods: {
-    goToNextPage() {
-      this.currentPage += 1;
-      this.getData();
-    },
-    goToPreviousPage() {
-      this.currentPage -= 1;
-      this.getData();
-    },
     async getData() {
+      this.id = this.$route.query.id;
       await axios
-        // .get("http://127.0.0.1:8000/api/upload/")
 
-        .get("http://127.0.0.1:8000/api/xmlupload/")
+        .get(`http://127.0.0.1:8000/api/xmlupload/${this.id}/`)
         .then((res) => {
           console.log(res.data);
-          this.datas = res.data;
-          //   this.datas = res.data.results;
-          // console.log(this.info);
-
-          //   if (res.data.next) {
-          //     this.showNextButton = true;
-          //   }
-
-          //   if (res.data.previous) {
-          //     this.showPreviousButton = true;
-          //   }
+          this.details = res.data;
         })
         .catch((error) => {
           console.log(error);

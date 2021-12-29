@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      info: [],
+      info: "",
       showNextButton: false,
       showPreviousButton: false,
       currentPage: 1,
