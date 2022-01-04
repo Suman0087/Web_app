@@ -29,7 +29,7 @@ router.register('api/xmlupload', api.XMLFileUploadViewset)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('task/', include('uploader.urls')),
+    # path('task/', include('uploader.urls')),
 ]
 
 if settings.DEBUG:

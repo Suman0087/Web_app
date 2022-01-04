@@ -5,7 +5,8 @@
       <div class="card-details">
         <h1>{{ details.xml_name}}</h1>
         <h2>Name</h2>
-        <p v-for="item in details.xml_name.read_name" :key="item">{{ item}}</p>
+        <!-- <p v-for="item in details.xml_name.read_name" :key="item">{{ item}}</p> -->
+        <li>{{ details.read_name}}</li>
 
         <h2>Title</h2>
 
