@@ -16,9 +16,10 @@ def fileupload(sender, instance, created, **kwargs):
         file = instance.pdf_file
 
         try:
-            count = Pdf.open(file)
-            instance.page_count = len(count.pages)
-            instance.pdf_total_page_count_checked = True
+            Pdf.open(file)
+            # count = Pdf.open(file)
+            # instance.page_count = len(count.pages)
+            # instance.pdf_total_page_count_checked = True
         except PasswordError:
             instance.is_password_protected = True
 
@@ -30,13 +31,7 @@ def fileupload(sender, instance, created, **kwargs):
 @receiver(post_save, sender=FileUpload)
 def pdf_file_upload(sender, instance, created, **kwargs):
     if created:
-        # instance.is_pdf_file_uploaded = True
         pdf_file_uploads.delay(instance.id)
-        # try:
-
-        #     pdf_file_uploads.delay(instance.id)
-        # except PasswordError:
-        #     pdf_file_uploads(instance.id)
 
 
 @receiver(post_save, sender=XMLFileUpload)
@@ -58,8 +53,6 @@ def xmlfileupload(sender, instance, created, **kwargs):
             instance.read_title = instance.read_title + \
                 (element.findtext('title'))+" "
             element.findtext('division')
-            instance.read_div = instance.read_div + \
-                (element.findtext('division'))+" "
 
         instance.save()
 
@@ -68,7 +61,4 @@ def xmlfileupload(sender, instance, created, **kwargs):
 def xml_files(sender, instance, created, **kwargs):
     if created:
         # instance.is_pdf_file_uploaded = True
-        try:
-            xml_file_uploaded.delay(instance.id)
-        except AttributeError:
-            xml_file_uploaded(instance.id)
+        xml_file_uploaded.delay(instance.id)

@@ -23,8 +23,9 @@ class XMLFileUpload(models.Model):
     read_xml = models.TextField(blank=True)
     xml_parse_completed = models.BooleanField(default=False)
     read_name = models.TextField(blank=True)
+    xml_name_parse_completed = models.BooleanField(default=False)
     read_title = models.TextField(blank=True)
-    read_div = models.TextField(blank=True)
+    xml_title_parse_completed = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.xml_name)

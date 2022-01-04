@@ -9,6 +9,9 @@
         <td>Name</td>
         <td>Is Password Protected</td>
         <td>Page No.</td>
+        <td>PDF File upload</td>
+        <td>Total page count check</td>
+        <td>File saved</td>
         <td>PDF File</td>
       </tr>
       <tr class="header-list" v-for="item in info" :key="item">
@@ -16,7 +19,9 @@
         <td>{{ item.name }}</td>
         <td>{{ item.is_password_protected }}</td>
         <td>{{ item.page_count }}</td>
-        <!-- <td>{{ item.xml_file }}</td> -->
+        <td>{{ item.is_pdf_file_uploaded }}</td>
+        <td>{{ item.pdf_total_page_count_checked }}</td>
+        <td>{{ item.pdf_file_saved }}</td>
         <!-- <td>{{ item.read_xml }}</td> -->
         <td>
           <a :href="item.pdf_file" download>

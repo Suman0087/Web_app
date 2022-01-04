@@ -6,14 +6,22 @@
       <tr class="header">
         <td>Sl No.</td>
         <td>XML Name</td>
+        <td>XML file upload</td>
+        <td>XML Parse Completed</td>
+        <td>XML Name Parse</td>
+        <td>XML Title Parse</td>
+
         <td>XML File</td>
       </tr>
       <tr class="header-list" v-for="item in datas" :key="item">
         <td>{{ item.id }}</td>
-
         <td>
           <a v-on:click="xmlupload(item.id)" href="#">{{ item.xml_name}}</a>
         </td>
+        <td>{{ item.is_xml_file_uploaded }}</td>
+        <td>{{ item.xml_parse_completed}}</td>
+        <td>{{ item.xml_name_parse_completed}}</td>
+        <td>{{ item.xml_title_parse_completed}}</td>
 
         <td>
           <a :href="item.xml_file" download>
